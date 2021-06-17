@@ -11,6 +11,9 @@ ${reset}
 		font-weight: 400;
 		line-height: 1.5;
 	}
+	canvas{
+		display: block;
+	}
 `
 export default function App({ Component, pageProps }: AppProps) {
 	return (

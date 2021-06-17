@@ -1,14 +1,12 @@
-import Image from 'next/image'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { up } from 'styled-breakpoints'
 
 import Text from '../components/text'
 import Button from '../components/button'
 import Form from '../components/form'
+import setupAnimation from '../utils/setup'
 import { Github, Twitter, Facebook, Logo } from '../components/icon'
-
-import rocket from '../public/rocket.jpg'
 
 const Bar = styled.div`
 	flex: 1;
@@ -29,8 +27,12 @@ const Bar = styled.div`
 `
 
 export default function Home() {
-	const canvasContainer = useRef<HTMLDivElement>(null)
+	const containerRef = useRef<HTMLDivElement>(null)
 
+	useEffect(() => {
+		const stop = setupAnimation(containerRef)
+		return () => stop()
+	}, [containerRef])
 	return (
 		<main
 			css={`
@@ -111,16 +113,16 @@ export default function Home() {
 				<Form />
 			</section>
 			<section
-				ref={canvasContainer}
+				ref={containerRef}
 				css={`
 					position: relative;
-					visibility: hidden;
+					display: none;
 					${up('md')} {
-						visibility: visible;
+						display: block;
 					}
 				`}
 			>
-				<Image src={rocket} alt="rocket" layout="fill" objectFit="cover" />
+				{/* <Image src={rocket} alt="rocket" layout="fill" objectFit="cover" /> */}
 			</section>
 		</main>
 	)
