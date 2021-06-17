@@ -29,12 +29,12 @@ export const theme: Theme = {
 		},
 		black: {
 			background: colors.black,
-			border: `1px solid ${colors.white}`,
+			border: `2px solid ${colors.white}`,
 			color: colors.white,
 			'&:hover': {
 				background: colors.white,
 				color: colors.black,
-				border: `1px solid ${colors.black}`,
+				border: `2px solid ${colors.black}`,
 			},
 		},
 	},

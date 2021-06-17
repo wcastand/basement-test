@@ -22,4 +22,13 @@ export const Button = styled.button<ButtonProps>`
 
 	${({ theme, btnType }) => theme.buttons[btnType || 'transparent']};
 `
+
+export const GroupButton = styled.div`
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	justify-items: stretch;
+	align-items: center;
+	gap: 12px;
+	padding-top: 4px;
+`
 export default Button

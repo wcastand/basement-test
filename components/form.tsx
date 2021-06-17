@@ -24,6 +24,7 @@ const Form: React.FC<{}> = () => {
 		window.localStorage.setItem('email', data.email)
 		window.localStorage.setItem('password', data.password)
 	}
+
 	return (
 		<form
 			css={`

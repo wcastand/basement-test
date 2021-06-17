@@ -21,33 +21,42 @@ const InputBase = styled.input`
 	margin-top: 4px;
 `
 
+const ErrorMsg = styled(Text).attrs({
+	type: 'light',
+	color: 'red',
+	role: 'alert',
+})`
+	min-height: 1.5rem;
+	display: block;
+	padding-top: 4px;
+	${up('md')} {
+		display: none;
+	}
+`
+
+const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+`
+const Container = styled.div`
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-direction: column;
+	${up('md')} {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+`
+
 export const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({ id, label, errors, ...props }, ref) => {
 	return (
-		<div
-			css={`
-				display: flex;
-				flex-direction: column;
-			`}
-		>
-			<div
-				css={`
-					display: flex;
-					justify-content: flex-start;
-					align-items: flex-start;
-					flex-direction: column;
-					${up('md')} {
-						flex-direction: row;
-						justify-content: space-between;
-					}
-				`}
-			>
+		<Wrapper>
+			<Container>
 				<Text as="label" type="body" color="gray700" htmlFor={id}>
 					{label}
 				</Text>
-				<Text
-					type="light"
-					color="red"
-					role="alert"
+				<ErrorMsg
 					css={`
 						display: none;
 						${up('md')} {
@@ -56,25 +65,11 @@ export const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({ 
 					`}
 				>
 					{errors?.message}
-				</Text>
-			</div>
+				</ErrorMsg>
+			</Container>
 			<InputBase id={id} ref={ref} aria-invalid={errors ? 'true' : 'false'} {...props} />
-			<Text
-				type="light"
-				color="red"
-				role="alert"
-				css={`
-					min-height: 1.5rem;
-					display: block;
-					padding-top: 4px;
-					${up('md')} {
-						display: none;
-					}
-				`}
-			>
-				{errors?.message}
-			</Text>
-		</div>
+			<ErrorMsg>{errors?.message}</ErrorMsg>
+		</Wrapper>
 	)
 }
 
