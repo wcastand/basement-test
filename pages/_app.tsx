@@ -1,7 +1,24 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import { AppProps } from 'next/app'
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import reset from 'styled-reset'
+import theme from '../theme'
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+const GlobalStyle = createGlobalStyle`
+${reset}
+	body{
+		font-family: 'Inter', sans-serif;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 1.5;
+	}
+`
+export default function App({ Component, pageProps }: AppProps) {
+	return (
+		<>
+			<GlobalStyle />
+			<ThemeProvider theme={theme}>
+				<Component {...pageProps} />
+			</ThemeProvider>
+		</>
+	)
 }
-export default MyApp
